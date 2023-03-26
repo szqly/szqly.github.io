@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>买卖股票问题</title>
+      <link href="/2023/03/26/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/03/26/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>详情见leetcode第122，309，714等题</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>这几道题目，共同点是可以多次购买和售出股票，可以用状态转移的思路解决。<br>122，714两题可以简单的将状态分为：<br>持有股票，和未持有股票两种状态。持有股票的状态可以由前一天的持有股票状态和<br>未持有股票状态转移得到。假设今天持有股票的状态为dp[i][0],昨天持有股票状态<br>为dp[i-1][0],昨天未持有股票的状态为dp[i-1][1],今天的股票价格为prices[i],<br>那么今天持有股票的最大利润:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][0]=max(dp[i-1][0],dp[i-1][1]-prices[i])</span><br></pre></td></tr></table></figure><p>同样今天未持有股票的最大利润为:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][1]=max(dp[i-1][1],dp[i-1][0]+prices[i])</span><br></pre></td></tr></table></figure><p>对于309题<br>需要将未持有股票分为两种状态——未持有股票在冷冻期dp[i][1]，未持有股票不在冷冻期dp[i][2]。<br>未持有股票在冷冻期说明刚刚卖了股票，只能由持有股票状态转移，<br>因为未持有股票在冷冻期不能持续，故不能从未持有股票在冷冻期转移得到所以： </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][1]=dp[i-1][0]+prices[i]</span><br></pre></td></tr></table></figure><p>未持有股票不在冷冻期可以由未持有股票冷冻期和未持有股票不在冷冻期转移得到</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][2]=max(dp[i-1][1],dp[i-1][2])</span><br></pre></td></tr></table></figure><p>持有股票可以由未持有股票不在冷冻期和持有股票两种状态转移得到</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][0]=max(dp[i-1][2]-prices[i],dp[i-1][0])</span><br></pre></td></tr></table></figure><p>所有状态中的最大利润即最大的利润</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> leetcode </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>leetcode020有效的括号</title>
       <link href="/2023/02/19/leetcode020%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/"/>
       <url>/2023/02/19/leetcode020%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</url>
