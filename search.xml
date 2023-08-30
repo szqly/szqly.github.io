@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>滑动窗口最大值</title>
+      <link href="/2023/08/30/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/"/>
+      <url>/2023/08/30/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。<br>返回滑动窗口中的最大值。</p><p>题目链接：<a href="https://leetcode-cn.com/problems/sliding-window-maximum/">https://leetcode-cn.com/problems/sliding-window-maximum/</a></p><h2 id="思路和算法："><a href="#思路和算法：" class="headerlink" title="思路和算法："></a>思路和算法：</h2><p>初始采用暴力的解法，遍历每一个窗口，记录最大值，很显然它超时了。<br>考虑到在一定的区间内，最大值只会是原来的最大值，或者新进入窗口的值，那么对于一个滑动的窗口就只需要考虑原来的<br>最大值和新进入的最大值的大小比较。<br>但是此时又出现了一个新的问题：如果没有出现新的最大值，原来的最大值又要从左边离开滑动窗口，此时又要遍历这个窗口内的数据<br>再次寻找最大值，显然此时在某些情况下和暴力遍历的解法效率相同。<br>此时希望能够知道这个窗口中的第二大的数是什么，于是可以使用双向队列，通过对队列的操作使队列单调递减。<br>如何使维护队列的单调性呢？在窗口向右滑动时，将新的元素与队尾的元素比较，如果队尾的元素小于新的元素，<br>那么就将队尾的元素移除出队列，因为此时只要新的元素存在，那么最大的元素就不可能是那个队尾的元素。<br>一直比较，直到队尾元素大于新的元素，或者队列为空。<br>在窗口右移的过程中，最大的元素可能会在窗口的最左边移出窗口，此时，就需要将队列的队首元素移除，使队首元素在窗口中。<br>代码如下：</p><pre><code class="c">int* maxSlidingWindow(int* nums, int numsSize, int k, int* returnSize)&#123;    int queue[numsSize];    int front = 0, rear = -1;    int left = 0, right = 0;    while(right&lt;numsSize)&#123;        while(rear&gt;=front&amp;&amp;nums[right]&gt;queue[rear])&#123;            rear--;        &#125;        queue[++rear]=nums[right++];        if(left+k&lt;=right)&#123;            if(nums[left]==queue[front])&#123;                front++;            &#125;else&#123;                nums[left]=queue[front]            &#125;            left++;        &#125;    &#125;    *returnSize=numsSize-k+1;    return nums;&#125;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>和为K的子数组</title>
       <link href="/2023/08/30/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/"/>
       <url>/2023/08/30/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</url>
