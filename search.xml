@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>和为K的子数组</title>
+      <link href="/2023/08/30/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/"/>
+      <url>/2023/08/30/%E5%92%8C%E4%B8%BAK%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><p>给你一个整数数组 nums 和一个整数 k ，请你统计并返回 该数组中和为 k 的连续子数组的个数 。</p><h2 id="思路和算法："><a href="#思路和算法：" class="headerlink" title="思路和算法："></a>思路和算法：</h2><p>将每一个出现过的前缀和用hash表记录下来，然后判断对于某一个前缀和，其值减去k的前缀和是否存在，<br>如果存在，那么这两个位置必定存在一个子数组的和为k，那么结果加上其值减去k的前缀和的数量即可。<br>这样便利整个数组，就可以得到答案。<br>代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num[<span class="number">40000002</span>]; <span class="comment">//用于记录前缀和数量的数组。</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">subarraySum</span><span class="params">(<span class="type">int</span>* nums, <span class="type">int</span> numsSize, <span class="type">int</span> k)</span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(num,<span class="number">0</span>,<span class="keyword">sizeof</span>(num));</span><br><span class="line">    <span class="type">int</span> count=<span class="number">0</span>;<span class="comment">//连续子数组的个数</span></span><br><span class="line">    <span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">    num[sum+<span class="number">20000001</span>]++;<span class="comment">//因为数据中有负数，数组下标+20000001使0居中，方便负数的记录</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;numsSize;++i)&#123;</span><br><span class="line">        sum+=nums[i];</span><br><span class="line">        <span class="keyword">if</span>(num[sum+<span class="number">20000001</span>-k]&gt;<span class="number">0</span>)&#123;<span class="comment">//num[sum+20000001-k]&gt;0 证明此时存在子数组和为k</span></span><br><span class="line">            count+=num[sum+<span class="number">20000001</span>-k];</span><br><span class="line">        &#125;</span><br><span class="line">        num[sum+<span class="number">20000001</span>]++;<span class="comment">//增加这个前缀和的数量</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>买卖股票问题</title>
       <link href="/2023/03/26/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/"/>
       <url>/2023/03/26/%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/</url>
